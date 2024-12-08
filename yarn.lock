@@ -3332,6 +3332,11 @@ expo-router@~4.0.11:
     semver "~7.6.3"
     server-only "^0.0.1"
 
+expo-secure-store@~14.0.0:
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/expo-secure-store/-/expo-secure-store-14.0.0.tgz#cf6eb7f73e619f8907d5a073e2f438927b5fc2ab"
+  integrity sha512-VyhtRFXP+7hQmHhKlHIOWid1Q/IRpM7Uif32tZHLZHvQ6FNz2cUkr26XWGvCa7btYbrR6OL++FBFZYjbIcRZTw==
+
 expo-splash-screen@~0.29.15:
   version "0.29.16"
   resolved "https://registry.yarnpkg.com/expo-splash-screen/-/expo-splash-screen-0.29.16.tgz#80b49af2605213e661a40022d724caa1ea48ccb3"
@@ -6911,6 +6916,11 @@ ts-interface-checker@^0.1.9:
   version "0.1.13"
   resolved "https://registry.yarnpkg.com/ts-interface-checker/-/ts-interface-checker-0.1.13.tgz#784fd3d679722bc103b1b4b8030bcddb5db2a699"
   integrity sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==
+
+ts-pattern@^5.5.0:
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/ts-pattern/-/ts-pattern-5.5.0.tgz#1f137eb2bd2bc30a030b5583dee022d00fac3415"
+  integrity sha512-jqbIpTsa/KKTJYWgPNsFNbLVpwCgzXfFJ1ukNn4I8hMwyQzHMJnk/BqWzggB0xpkILuKzaO/aMYhS0SkaJyKXg==
 
 tslib@^2.0.1, tslib@^2.4.0:
   version "2.8.1"
