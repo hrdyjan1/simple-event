@@ -1,21 +1,14 @@
 export { ErrorBoundary } from 'expo-router';
-
-import { Text } from 'react-native';
 import { Redirect, Stack } from 'expo-router';
-import { useAuthSession } from '@/context/auth/AuthProvider';
-import { Typography } from '@/components/Typography/Typography';
+import { useAppSelector } from '@/store/store';
 
 function AppLayout() {
-  const { session, isLoading } = useAuthSession();
-
-  // You can keep the splash screen open, or render a loading screen like we do here.
-  if (isLoading) {
-    return <Typography>Loading...</Typography>;
-  }
+  const user = useAppSelector((s) => s.auth.user);
+  console.log('🚀 ~ AppLayout ~ user:', user);
 
   // Only require authentication within the (app) group's layout as users
   // need to be able to access the (auth) group and sign in again.
-  if (!session) {
+  if (!user) {
     // On web, static rendering will stop here as the user is not authenticated
     // in the headless Node process that the pages are rendered in.
     return <Redirect href='/sign-in' />;

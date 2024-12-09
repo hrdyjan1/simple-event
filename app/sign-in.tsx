@@ -1,21 +1,26 @@
+import { useLoginUserMutation } from '@/api/baseApi';
 import { Block } from '@/components/Block/Block';
-import { Typography } from '@/components/Typography/Typography';
-import { useAuthSession } from '@/context/auth/AuthProvider';
+import { setUser } from '@/store/slices/auth';
 import { router } from 'expo-router';
-import { Pressable } from 'react-native';
+import { Button } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 function SignIn() {
-  const { signIn } = useAuthSession();
+  const dispatch = useDispatch();
+  const [loginUser] = useLoginUserMutation();
+
+  const handleLogin = async () => {
+    loginUser({ email: 'steverogers@strv.com', password: 'am3riCa' })
+      .unwrap()
+      .then((data) => {
+        router.replace('/');
+        dispatch(setUser(data));
+      });
+  };
+
   return (
     <Block align='center' hasFlexOne>
-      <Pressable
-        onPress={() => {
-          signIn();
-          router.replace('/');
-        }}
-      >
-        <Typography>Sign In</Typography>
-      </Pressable>
+      <Button onPress={handleLogin} title='Sign In' />
     </Block>
   );
 }

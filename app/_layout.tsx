@@ -1,4 +1,6 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { Provider } from 'react-redux';
+
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -8,7 +10,8 @@ import { Slot } from 'expo-router';
 import { Block } from '@/components/Block/Block';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { AuthProvider } from '@/context/auth/AuthProvider';
+import { persistor, store } from '@/store/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -42,13 +45,15 @@ function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AuthProvider>
-        <Block hasFlexOne>
-          <Slot />
-        </Block>
-      </AuthProvider>
-    </ThemeProvider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <Block hasFlexOne>
+            <Slot />
+          </Block>
+        </ThemeProvider>
+      </PersistGate>
+    </Provider>
   );
 }
 

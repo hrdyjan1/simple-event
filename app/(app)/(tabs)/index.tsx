@@ -1,10 +1,10 @@
-import { useAuthSession } from '@/context/auth/AuthProvider';
 import { Block } from '@/components/Block/Block';
 import { Typography } from '@/components/Typography/Typography';
 import { Separator } from '@/components/Separator/Separator';
+import { useGetEventsQuery } from '@/api/baseApi';
 
 function TabOneScreen() {
-  const { signOut } = useAuthSession();
+  const data = useGetEventsQuery();
 
   return (
     <Block hasFlexOne align='center'>

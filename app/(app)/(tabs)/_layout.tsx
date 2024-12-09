@@ -7,11 +7,12 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import { useClientOnlyValue } from '@/hooks/useClientOnlyValue';
 import { TabBarIcon } from '@/components/TabBarIcon/TabBarIcon';
 import { Icon } from '@/components/Icon/Icon';
-import { useAuthSession } from '@/context/auth/AuthProvider';
+import { useDispatch } from 'react-redux';
+import { resetAuth } from '@/store/slices/auth';
 
 function TabLayout() {
   const colorScheme = useColorScheme();
-  const { signOut } = useAuthSession();
+  const dispatch = useDispatch();
 
   return (
     <Tabs
@@ -28,7 +29,7 @@ function TabLayout() {
           title: 'Tab One',
           tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />,
           headerRight: () => (
-            <Pressable onPress={signOut}>
+            <Pressable onPress={() => dispatch(resetAuth())}>
               {({ pressed }) => <Icon name='sign-out' isPressed={pressed} />}
             </Pressable>
           ),
