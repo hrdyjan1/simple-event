@@ -9,6 +9,7 @@ export default function TransparentModal() {
   return (
     <ModalContent>
       <Typography>This is a transparent modal</Typography>
+      {/* TODO: Fix go back  */}
       <Button title='Close Modal' onPress={() => router.back()} />
     </ModalContent>
   );

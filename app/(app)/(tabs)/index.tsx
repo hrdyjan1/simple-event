@@ -1,18 +1,25 @@
 import { Block } from '@/components/Block/Block';
-import { Typography } from '@/components/Typography/Typography';
 import { Separator } from '@/components/Separator/Separator';
-import { useGetEventsQuery } from '@/api/baseApi';
+import { useGetDashboardListQuery } from '@/api/baseApi';
+import { DashboardCard } from '@/components/DashboardCard/DashboardCard';
+import { FlatList, ListRenderItem } from 'react-native';
+import { DashboardDetailResponse } from '@/api/apiTypes';
+import { Link } from 'expo-router';
 
-function TabOneScreen() {
-  const data = useGetEventsQuery();
+function Dashboard() {
+  const { data } = useGetDashboardListQuery();
+
+  const renderItem: ListRenderItem<DashboardDetailResponse> = ({ item }) => (
+    <Link href={{ pathname: '/dashboard/[id]', params: { id: item.id } }}>
+      <DashboardCard data={item} />
+    </Link>
+  );
 
   return (
     <Block hasFlexOne align='center'>
-      <Typography>Tab One</Typography>
-      <Separator />
-      <Typography>Content</Typography>
+      <FlatList data={data} renderItem={renderItem} ItemSeparatorComponent={Separator} />
     </Block>
   );
 }
 
-export default TabOneScreen;
+export default Dashboard;
