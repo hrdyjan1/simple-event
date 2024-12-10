@@ -1,26 +1,18 @@
-import { useLoginUserMutation } from '@/api/baseApi';
-import { Block } from '@/components/Block/Block';
-import { setUser } from '@/store/slices/auth';
 import { router } from 'expo-router';
 import { Button } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { Block } from '@/components/Block/Block';
+import { SignInForm } from '@/components/SignInForm/SignInForm';
 
 function SignIn() {
-  const dispatch = useDispatch();
-  const [loginUser] = useLoginUserMutation();
-
-  const handleLogin = async () => {
-    loginUser({ email: 'steverogers@strv.com', password: 'am3riCa' })
-      .unwrap()
-      .then((data) => {
-        router.replace('/');
-        dispatch(setUser(data));
-      });
+  const goToSignUp = () => {
+    router.replace('/sign-up');
   };
 
   return (
-    <Block align='center' hasFlexOne>
-      <Button onPress={handleLogin} title='Sign In' />
+    <Block hasFlexOne>
+      <SignInForm />
+      <Block height={10} />
+      <Button onPress={goToSignUp} title='Sign Up' />
     </Block>
   );
 }

@@ -6,8 +6,7 @@ import {
 } from '@reduxjs/toolkit/query';
 import { setAccessToken, setRefreshToken } from '@/store/slices/auth';
 import { API_CONSTANTS } from './apiConstants';
-
-type MetaType = { response?: { headers: { get: (headerName: string) => string | null } } };
+import { MetaType } from '@/types/MetaType';
 
 const handleAuthQueryStarted: TypedMutationOnQueryStarted<
   unknown,
@@ -17,6 +16,7 @@ const handleAuthQueryStarted: TypedMutationOnQueryStarted<
   try {
     const { meta } = await queryFulfilled;
 
+    // TODO: Why parse meta not work?
     const accessToken = (meta as MetaType)?.response?.headers.get(
       API_CONSTANTS.AUTHORIZATION_HEADER_KEY
     );

@@ -2,8 +2,9 @@ import { resetAuth, setAccessToken, setUser } from '@/store/slices/auth';
 import { baseQueryWithAuth } from './baseQueryWithAuth';
 import { BaseQueryApi } from '@reduxjs/toolkit/query';
 import { RootState } from '@/store/types';
-import { metaSchema, userSchema } from './apiSchema';
+import { userSchema } from './apiSchema';
 import { API_CONSTANTS } from './apiConstants';
+import { MetaType } from '@/types/MetaType';
 
 const handleRefreshToken = async (api: BaseQueryApi, extraOptions: {}) => {
   const refreshToken = (api.getState() as RootState).auth.refreshToken;
@@ -20,8 +21,10 @@ const handleRefreshToken = async (api: BaseQueryApi, extraOptions: {}) => {
   );
 
   const parsedData = userSchema.parse(response.data);
-  const parsedMeta = metaSchema.parse(response.meta);
-  const accessToken = parsedMeta.response?.headers.get(API_CONSTANTS.AUTHORIZATION_HEADER_KEY);
+  // TODO: Why parse meta not work?
+  const accessToken = (response.meta as MetaType)?.response?.headers.get(
+    API_CONSTANTS.AUTHORIZATION_HEADER_KEY
+  );
 
   if (parsedData && accessToken) {
     api.dispatch(setUser(parsedData));

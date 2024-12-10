@@ -1,5 +1,12 @@
-type LoginUserQueryArg = {
+type SignInUserQueryArg = {
   email: string;
+  password: string;
+};
+
+type SignUpUserQueryArg = {
+  email: string;
+  firstName: string;
+  lastName: string;
   password: string;
 };
 
@@ -36,9 +43,11 @@ type DashboardDetailResponse = {
   owner: UserResponse;
 };
 
+
 export {
   type UserResponse,
-  type LoginUserQueryArg,
+  type SignInUserQueryArg,
+  type SignUpUserQueryArg,
   type DashboardDetailResponse,
   type DashboardGetDetailQueryArg,
   type DashboardCreateDetailMutationArg,
