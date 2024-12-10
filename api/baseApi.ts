@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQuery } from './baseQuery';
 import { handleAuthQueryStarted } from './handleAuthQueryStarted';
-import { LoginUserQueryArg, UserResponse } from './apiTypes';
+import { DashboardDetailQueryArg, DashboardDetailResponse, LoginUserQueryArg, UserResponse } from './apiTypes';
 
 export const baseApi = createApi({
   reducerPath: 'api',
@@ -15,13 +15,19 @@ export const baseApi = createApi({
       }),
       onQueryStarted: handleAuthQueryStarted,
     }),
-    getEvents: build.query<unknown, void>({
+    getDashboardList: build.query<DashboardDetailResponse[], void>({
       query: () => ({
         url: '/events',
+        method: 'GET',
+      }),
+    }),
+    getDashboardDetail: build.query<DashboardDetailResponse, DashboardDetailQueryArg>({
+      query: (params) => ({
+        url: `/events/${params.id}`,
         method: 'GET',
       }),
     }),
   }),
 });
 
-export const { useLoginUserMutation, useGetEventsQuery} = baseApi;
+export const { useLoginUserMutation, useGetDashboardDetailQuery, useGetDashboardListQuery} = baseApi;
