@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  createDashboardDetailInitialState,
   createDashboardDetailReducer,
   CreateDashboardDetailState,
 } from './utils/createDashboardDetailReducer';
@@ -11,6 +10,7 @@ import { Input } from '../Input/Input';
 import { isDefined } from '@/constants/isDefined';
 import { combineDateAndTimeToUTC } from '@/utils/date/combineDateAndTimeToUTC';
 import { useCreateDashboardDetailMutation } from '@/api/baseApi';
+import { createDashboardDetailInitialState } from './utils/createDashboardInitialState';
 
 function CreateDashboardDetailForm() {
   const [state, dispatch] = React.useReducer(

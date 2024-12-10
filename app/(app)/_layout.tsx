@@ -4,7 +4,6 @@ import { useAppSelector } from '@/store/store';
 
 function AppLayout() {
   const user = useAppSelector((s) => s.auth.user);
-  console.log('🚀 ~ AppLayout ~ user:', user);
 
   // Only require authentication within the (app) group's layout as users
   // need to be able to access the (auth) group and sign in again.
@@ -16,7 +15,8 @@ function AppLayout() {
 
   return (
     <Stack>
-      <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+      <Stack.Screen name='index' />
+      <Stack.Screen name='profile' />
       <Stack.Screen
         name='modal'
         options={{ presentation: 'transparentModal', animation: 'fade', headerShown: false }}

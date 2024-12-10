@@ -2,9 +2,10 @@ import { Block } from '@/components/Block/Block';
 import { Separator } from '@/components/Separator/Separator';
 import { useGetDashboardListQuery } from '@/api/baseApi';
 import { DashboardCard } from '@/components/DashboardCard/DashboardCard';
-import { Button, FlatList, ListRenderItem } from 'react-native';
+import { FlatList, ListRenderItem } from 'react-native';
 import { DashboardDetailResponse } from '@/api/apiTypes';
 import { Link } from 'expo-router';
+import { Typography } from '@/components/Typography/Typography';
 
 function Dashboard() {
   const { data } = useGetDashboardListQuery();
@@ -17,6 +18,9 @@ function Dashboard() {
 
   return (
     <Block hasFlexOne align='center'>
+      <Link href='/profile' asChild>
+        <Typography>Profile</Typography>
+      </Link>
       <FlatList data={data} renderItem={renderItem} ItemSeparatorComponent={Separator} />
     </Block>
   );

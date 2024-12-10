@@ -1,5 +1,5 @@
 import { Nullish } from '@/types/Nullish';
-import { CreateDashboardDetailStateSchema } from './createDashboardDetailSchema';
+import { createDashboardDetailStateSchema } from './createDashboardDetailSchema';
 
 type CreateDashboardDetailState = {
   title: string;
@@ -10,14 +10,6 @@ type CreateDashboardDetailState = {
   errors: Partial<Record<keyof Omit<CreateDashboardDetailState, 'errors'>, string | Nullish>>;
 };
 
-const createDashboardDetailInitialState: CreateDashboardDetailState = {
-  title: '',
-  description: '',
-  date: '',
-  time: '',
-  capacity: '',
-  errors: {},
-};
 
 type SetFieldAction = { type: 'SET_FIELD'; field: keyof CreateDashboardDetailState; value: string };
 type ValidateAction = { type: 'VALIDATE' };
@@ -32,7 +24,7 @@ function handleSetField(state: CreateDashboardDetailState, action: SetFieldActio
 }
 
 function handleValidate(state: CreateDashboardDetailState) {
-  const validationResult = CreateDashboardDetailStateSchema.safeParse(state);
+  const validationResult = createDashboardDetailStateSchema.safeParse(state);
   if (!validationResult.success) {
     const errors = validationResult.error.errors.reduce(
       (acc, err) => ({
@@ -63,6 +55,5 @@ const createDashboardDetailReducer = (
 
 export {
   type CreateDashboardDetailState,
-  createDashboardDetailInitialState,
   createDashboardDetailReducer,
 };

@@ -5,8 +5,9 @@ import {
   DashboardGetDetailQueryArg,
   DashboardCreateDetailMutationArg,
   DashboardDetailResponse,
-  LoginUserQueryArg,
+  SignInUserQueryArg,
   UserResponse,
+  SignUpUserQueryArg,
 } from './apiTypes';
 
 export const baseApi = createApi({
@@ -14,9 +15,17 @@ export const baseApi = createApi({
   tagTypes: ['dashboard'],
   baseQuery: baseQuery,
   endpoints: (build) => ({
-    loginUser: build.mutation<UserResponse, LoginUserQueryArg>({
+    signInUser: build.mutation<UserResponse, SignInUserQueryArg>({
       query: (params) => ({
         url: `/auth/native`,
+        method: 'POST',
+        body: params,
+      }),
+      onQueryStarted: handleAuthQueryStarted,
+    }),
+    signUpUser: build.mutation<UserResponse, SignUpUserQueryArg>({
+      query: (params) => ({
+        url: `/auth/register`,
         method: 'POST',
         body: params,
       }),
@@ -50,7 +59,8 @@ export const baseApi = createApi({
 });
 
 export const {
-  useLoginUserMutation,
+  useSignInUserMutation,
+  useSignUpUserMutation,
   useGetDashboardDetailQuery,
   useGetDashboardListQuery,
   useCreateDashboardDetailMutation,
