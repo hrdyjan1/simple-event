@@ -3,8 +3,15 @@ type LoginUserQueryArg = {
   password: string;
 };
 
-type DashboardDetailQueryArg = {
+type DashboardGetDetailQueryArg = {
   id: string;
+};
+
+type DashboardCreateDetailMutationArg = {
+  title: string;
+  description: string;
+  startsAt: string;
+  capacity: number;
 };
 
 type UserResponse = {
@@ -26,12 +33,13 @@ type DashboardDetailResponse = {
   createdAt: string;
   updatedAt: string;
   attendees: UserResponse[];
-  owner: UserResponse[];
+  owner: UserResponse;
 };
 
 export {
   type UserResponse,
   type LoginUserQueryArg,
   type DashboardDetailResponse,
-  type DashboardDetailQueryArg,
+  type DashboardGetDetailQueryArg,
+  type DashboardCreateDetailMutationArg,
 };

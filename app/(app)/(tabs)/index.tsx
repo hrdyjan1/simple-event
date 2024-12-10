@@ -2,7 +2,7 @@ import { Block } from '@/components/Block/Block';
 import { Separator } from '@/components/Separator/Separator';
 import { useGetDashboardListQuery } from '@/api/baseApi';
 import { DashboardCard } from '@/components/DashboardCard/DashboardCard';
-import { FlatList, ListRenderItem } from 'react-native';
+import { Button, FlatList, ListRenderItem } from 'react-native';
 import { DashboardDetailResponse } from '@/api/apiTypes';
 import { Link } from 'expo-router';
 

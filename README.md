@@ -11,3 +11,5 @@ Simple Event is a React Native application for managing and viewing events effor
 ### Hesitations
 
 - dashboard vs event
+- create event (startAt === time + date)
+- create event/event detail different input order

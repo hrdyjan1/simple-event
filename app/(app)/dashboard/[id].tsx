@@ -1,7 +1,8 @@
 import { useGetDashboardDetailQuery } from '@/api/baseApi';
 import { Block } from '@/components/Block/Block';
 import { Typography } from '@/components/Typography/Typography';
-import { useLocalSearchParams } from 'expo-router';
+import { Link, useLocalSearchParams } from 'expo-router';
+import { Button } from 'react-native';
 
 function DashboardDetail() {
   const params = useLocalSearchParams();
@@ -14,6 +15,9 @@ function DashboardDetail() {
       <Typography>ID: {id}</Typography>
       <Typography>Title: {data?.title}</Typography>
       <Typography>Capacity: {data?.capacity}</Typography>
+      <Link href={'/(app)/dashboard/create'} asChild>
+        <Button title='Create' onPress={() => {}} />
+      </Link>
     </Block>
   );
 }
