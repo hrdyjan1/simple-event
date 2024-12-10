@@ -1,15 +1,5 @@
 import { z } from 'zod';
 
-const responseHeadersSchema = z.object({
-  headers: z.object({
-    get: z.function().args(z.string()).returns(z.string().optional()),
-  }),
-});
-
-const metaSchema = z.object({
-  response: responseHeadersSchema.optional(),
-});
-
 const userSchema = z.object({
   id: z.string().uuid(),
   firstName: z.string(),
@@ -19,4 +9,4 @@ const userSchema = z.object({
   updatedAt: z.string().datetime(),
 });
 
-export { metaSchema, userSchema };
+export { userSchema };
