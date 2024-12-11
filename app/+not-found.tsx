@@ -10,7 +10,7 @@ function NotFoundScreen() {
         <Typography>This screen doesn't exist.</Typography>
 
         <Link href='/'>
-          <Typography variant='alternative'>Go to home screen!</Typography>
+          <Typography>Go to home screen!</Typography>
         </Link>
       </Block>
     </>

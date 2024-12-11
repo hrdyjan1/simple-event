@@ -9,20 +9,28 @@ import { Nullish } from '@/types/Nullish';
 import { formatToFullReadableDate } from '@/utils/date/formatToFullReadableDate';
 import { Icon } from '../Icon/Icon';
 import { Card } from '../Card/Card';
+import { AttendVariant } from '@/api/types/AttendVariant';
 
 interface Props {
+  userId: string | undefined;
   data: DashboardDetailResponse;
-  onPress?: () => void;
-  userId?: string;
+  isToggleAttendLoading?: boolean;
+  toggleAttendee?: (id: string, variant: AttendVariant) => void;
 }
 
-function getActionVariant(userId: string | Nullish, data: DashboardDetailResponse) {
+function getActionVariant(
+  userId: string | Nullish,
+  data: DashboardDetailResponse
+): AttendVariant | null {
+  console.log('🚀 ~ data.attendees:', data.attendees);
+  console.log('🚀 ~ console:', userId);
+
   if (userId === data.ownerId) {
-    return 'edit' as const;
+    return 'edit';
   } else if (data.attendees.find((a) => userId === a.id)) {
-    return 'leave' as const;
+    return 'leave';
   } else if (data.attendees.length < data.capacity) {
-    return 'join' as const;
+    return 'join';
   } else {
     return null;
   }
@@ -31,6 +39,12 @@ function getActionVariant(userId: string | Nullish, data: DashboardDetailRespons
 function DashboardCard(props: Props) {
   const variant = getActionVariant(props.userId, props.data);
   const dateTime = formatToFullReadableDate(props.data.startsAt);
+
+  const toggleVariant = () => {
+    if (isDefined(props.toggleAttendee) && variant) {
+      props.toggleAttendee(props.data.id, variant);
+    }
+  };
 
   return (
     <Card minHeight={296}>
@@ -61,7 +75,11 @@ function DashboardCard(props: Props) {
           </Typography>
         </View>
         {isDefined(variant) ? (
-          <DashboardCardActionButton variant={variant} onPress={() => {}} />
+          <DashboardCardActionButton
+            variant={variant}
+            onPress={toggleVariant}
+            isLoading={props.isToggleAttendLoading}
+          />
         ) : null}
       </View>
     </Card>

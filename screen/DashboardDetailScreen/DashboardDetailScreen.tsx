@@ -10,10 +10,12 @@ import { ActivityIndicator } from 'react-native';
 import { DashboardDetailScreenLowerHeader } from './components/DashboardDetailScreenLoweHeader';
 import { AttendeesCard } from '@/components/AttendeesCard/AttendeesCard';
 import { getAttendeeDetails } from './utils/getAttendeeDetails';
+import { useToggleAttendee } from '@/api/hooks/useToggleAttendee';
 
 function DashboardDetailScreen() {
   const params = useLocalSearchParams();
   const user = useAppSelector((s) => s.auth.user);
+  const { toggleAttendee, checkIsAttendingLoading } = useToggleAttendee();
 
   const id = Array.isArray(params.id) ? params.id[0] : params.id;
   const { data, isLoading, isError } = useGetDashboardDetailQuery({ id });
@@ -52,7 +54,12 @@ function DashboardDetailScreen() {
           <Block height={23} />
 
           <Block paddingHorizontal={10} width='100%'>
-            <DashboardCard data={data} />
+            <DashboardCard
+              data={data}
+              userId={user?.id}
+              toggleAttendee={toggleAttendee}
+              isToggleAttendLoading={checkIsAttendingLoading(data.id)}
+            />
           </Block>
 
           <Block height={16} />

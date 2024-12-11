@@ -8,6 +8,8 @@ import {
   SignInUserQueryArg,
   UserResponse,
   SignUpUserQueryArg,
+  AttendEventMutationArq,
+  UnAttendEventMutationArq,
 } from './apiTypes';
 
 export const baseApi = createApi({
@@ -43,6 +45,7 @@ export const baseApi = createApi({
         url: `/events/${params.id}`,
         method: 'GET',
       }),
+      providesTags: ['dashboard'],
     }),
     createDashboardDetail: build.mutation<
       DashboardDetailResponse,
@@ -55,13 +58,31 @@ export const baseApi = createApi({
       }),
       invalidatesTags: ['dashboard'],
     }),
+    attendEvent: build.mutation<unknown, AttendEventMutationArq>({
+      query: (params) => ({
+        url: `/events/${params.id}/attendees/me`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['dashboard'],
+    }),
+    unAttendEvent: build.mutation<unknown, UnAttendEventMutationArq>({
+      query: (params) => ({
+        url: `/events/${params.id}/attendees/me`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['dashboard'],
+    }),
   }),
 });
 
 export const {
   useSignInUserMutation,
   useSignUpUserMutation,
-  useGetDashboardDetailQuery,
+  useAttendEventMutation,
   useGetDashboardListQuery,
+  useUnAttendEventMutation,
+  useGetDashboardDetailQuery,
+  useLazyGetDashboardListQuery,
+  useLazyGetDashboardDetailQuery,
   useCreateDashboardDetailMutation,
 } = baseApi;

@@ -26,7 +26,7 @@ function SignInScreen() {
     resetError
   );
 
-  const [signInUser, { isLoading }] = useSignInUserMutation();
+  const [signInUser, { isLoading, ...rest }] = useSignInUserMutation();
   const reduxDispatch = useDispatch();
 
   const handleSignIn = () => {

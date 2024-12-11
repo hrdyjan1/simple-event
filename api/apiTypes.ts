@@ -21,6 +21,14 @@ type DashboardCreateDetailMutationArg = {
   capacity: number;
 };
 
+type AttendEventMutationArq = {
+  id: string;
+};
+
+type UnAttendEventMutationArq = {
+  id: string;
+};
+
 type UserResponse = {
   id: string;
   firstName: string;
@@ -48,7 +56,9 @@ export {
   type UserResponse,
   type SignInUserQueryArg,
   type SignUpUserQueryArg,
+  type AttendEventMutationArq,
   type DashboardDetailResponse,
+  type UnAttendEventMutationArq,
   type DashboardGetDetailQueryArg,
   type DashboardCreateDetailMutationArg,
 };
