@@ -1,14 +1,13 @@
 import React from 'react';
-import { Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Logo } from '../Logo/Logo';
 import { Block } from '../Block/Block';
 import { Typography } from '../Typography/Typography';
 import { Icon } from '../Icon/Icon';
-import { InitialsProfile } from '../InitialsProfile/InitialsProfile';
+import { DashboardUserHeader } from '../DashboardUserHeader/DashboardUserHeader';
 
 interface DashboardHeaderProps {
-  initials: string;
+  firstName: string;
+  lastName: string;
   onInitialsProfilePress?: () => void;
 }
 
@@ -16,17 +15,13 @@ function DashboardHeader(props: DashboardHeaderProps) {
   return (
     <>
       <Block height={24} />
-      <Block row alignItems='center' justifyContent='space-between'>
-        <Logo position='relative' />
 
-        <Pressable onPress={props.onInitialsProfilePress}>
-          <Block row alignItems='center'>
-            <InitialsProfile text={props.initials} />
-            <Block width={8} />
-            <Icon name='caret-down' color='#D9DCE1' />
-          </Block>
-        </Pressable>
-      </Block>
+      <DashboardUserHeader
+        firstName={props.firstName}
+        lastName={props.lastName}
+        onInitialsProfilePress={props.onInitialsProfilePress}
+      />
+
       <Block height={64} />
 
       <Block row justifyContent='space-between'>

@@ -5,8 +5,10 @@ interface TypographyProps extends React.PropsWithChildren {
   color?: ColorValue | undefined;
   top?: number;
   fontSize?: number;
+  capital?: number;
   lineHeight?: number;
   fontWeight?: 300 | 400 | 500 | 600;
+  textTransform?: TextStyle['textTransform'];
 }
 
 function getFontFamily(variant: TypographyProps['fontWeight']): TextStyle {
@@ -24,6 +26,7 @@ function Typography(props: TypographyProps) {
     color: props.color,
     fontSize: props.fontSize,
     lineHeight: props.lineHeight,
+    textTransform: props.textTransform,
     ...getFontFamily(props.fontWeight),
   };
 

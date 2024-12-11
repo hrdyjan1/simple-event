@@ -9,30 +9,25 @@ function getSizeStyle(props: Pick<BlockProps, 'hasFlexOne' | 'isAbsoluteFill'>):
     .otherwise(() => ({}));
 }
 
-// TODO: no {widht, heihgt} but props
-function Block({
-  row,
-  align,
-  width,
-  height,
-  darkColor,
-  lightColor,
-  alignItems,
-  justifyContent,
-  ...otherProps
-}: BlockProps) {
+function Block(props: BlockProps) {
   const style: ViewStyle = {
-    width,
-    height,
-    flexDirection: row ? 'row' : 'column',
-    alignItems: alignItems ?? undefined,
-    justifyContent: justifyContent ?? undefined,
-    paddingHorizontal: otherProps.paddingHorizontal ?? 0,
-    backgroundColor: otherProps.backgroundColor ?? 'transparent',
-    ...getSizeStyle(otherProps),
+    gap: props.gap,
+    width: props.width,
+    height: props.height,
+    borderRadius: props.radius,
+    alignItems: props.alignItems,
+    borderColor: props.borderColor,
+    borderWidth: props.borderWidth,
+    justifyContent: props.justifyContent,
+    flexWrap: props.wrap ? 'wrap' : 'nowrap',
+    flexDirection: props.row ? 'row' : 'column',
+    paddingVertical: props.paddingVertical ?? 0,
+    paddingHorizontal: props.paddingHorizontal ?? 0,
+    backgroundColor: props.backgroundColor ?? 'transparent',
+    ...getSizeStyle(props),
   };
 
-  return <View style={style} {...otherProps} />;
+  return <View style={style} {...props} />;
 }
 
 export { Block };

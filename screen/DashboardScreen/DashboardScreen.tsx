@@ -11,13 +11,16 @@ import { DashboardHeader } from '@/components/DashboardHeader/DashboardHeader';
 function DashboardScreen() {
   const { data } = useGetDashboardListQuery();
   const user = useAppSelector((s) => s.auth.user);
-  const initials = `${user?.firstName?.[0]}${user?.lastName?.[0]}`;
 
   const renderItem: ListRenderItem<DashboardDetailResponse> = ({ item }) => (
     <Link href={{ pathname: '/dashboard/[id]', params: { id: item.id } }}>
-      <DashboardCard data={item} userId={user?.id} />
+      <Block paddingHorizontal={10} width='100%'>
+        <DashboardCard data={item} userId={user?.id} />
+      </Block>
     </Link>
   );
+
+  const goToProfile = () => router.navigate('/profile');
 
   return (
     <Screen>
@@ -29,8 +32,9 @@ function DashboardScreen() {
         ListHeaderComponentStyle={{ paddingHorizontal: 24 }}
         ListHeaderComponent={() => (
           <DashboardHeader
-            initials={initials}
-            onInitialsProfilePress={() => router.navigate('/profile')}
+            lastName={user?.lastName ?? ''}
+            firstName={user?.firstName ?? ''}
+            onInitialsProfilePress={goToProfile}
           />
         )}
       />

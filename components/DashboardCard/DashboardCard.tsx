@@ -8,6 +8,7 @@ import { isDefined } from '@/constants/isDefined';
 import { Nullish } from '@/types/Nullish';
 import { formatToFullReadableDate } from '@/utils/date/formatToFullReadableDate';
 import { Icon } from '../Icon/Icon';
+import { Card } from '../Card/Card';
 
 interface Props {
   data: DashboardDetailResponse;
@@ -32,58 +33,42 @@ function DashboardCard(props: Props) {
   const dateTime = formatToFullReadableDate(props.data.startsAt);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.card}>
-        <View style={styles.content}>
-          {isDefined(dateTime) ? (
-            <>
-              <Typography fontSize={14} lineHeight={24} color='#CACDD0'>
-                {dateTime}
-              </Typography>
-              <Block height={8} />
-            </>
-          ) : null}
-          <Typography fontSize={22} lineHeight={48} color='#323C46'>
-            {props.data.title}
-          </Typography>
-          <Typography fontSize={14} lineHeight={24} color='#7D7878' top={-10}>
-            {props.data.owner.firstName} {props.data.owner.lastName}
-          </Typography>
-          <Block height={32} />
-          <Text style={styles.description}>{props.data.description}</Text>
-        </View>
-        <View style={styles.footer}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Icon name='person' size={16} color='#949EA8' />
-            <Block width={8} />
-            <Typography color='#949EA8' fontSize={14} lineHeight={24}>
-              {props.data.attendees.length} of {props.data.capacity}
+    <Card minHeight={296}>
+      <View style={styles.content}>
+        {isDefined(dateTime) ? (
+          <>
+            <Typography fontSize={14} lineHeight={24} color='#CACDD0'>
+              {dateTime}
             </Typography>
-          </View>
-          {isDefined(variant) ? (
-            <DashboardCardActionButton variant={variant} onPress={() => {}} />
-          ) : null}
-        </View>
+            <Block height={8} />
+          </>
+        ) : null}
+        <Typography fontSize={22} lineHeight={48} color='#323C46'>
+          {props.data.title}
+        </Typography>
+        <Typography fontSize={14} lineHeight={24} color='#7D7878' top={-10}>
+          {props.data.owner.firstName} {props.data.owner.lastName}
+        </Typography>
+        <Block height={32} />
+        <Text style={styles.description}>{props.data.description}</Text>
       </View>
-    </View>
+      <View style={styles.footer}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Icon name='person' size={16} color='#949EA8' />
+          <Block width={8} />
+          <Typography color='#949EA8' fontSize={14} lineHeight={24}>
+            {props.data.attendees.length} of {props.data.capacity}
+          </Typography>
+        </View>
+        {isDefined(variant) ? (
+          <DashboardCardActionButton variant={variant} onPress={() => {}} />
+        ) : null}
+      </View>
+    </Card>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 10,
-    width: '100%',
-  },
-  card: {
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    minHeight: 296,
-    shadowColor: '#000',
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-    elevation: 5,
-  },
   content: {
     paddingLeft: 24,
     paddingTop: 24,

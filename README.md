@@ -16,3 +16,5 @@ Simple Event is a React Native application for managing and viewing events effor
 - password eye off/on reverse
 - sign up password eye is missing
 - what about no capacity action button
+- data status loading, error, ...
+- empty values
