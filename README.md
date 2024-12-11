@@ -14,3 +14,5 @@ Simple Event is a React Native application for managing and viewing events effor
 - create event (startAt === time + date)
 - create event/event detail different input order
 - password eye off/on reverse
+- sign up password eye is missing
+- what about no capacity action button

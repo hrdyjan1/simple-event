@@ -20,7 +20,7 @@ function getFontFamily(variant: TypographyProps['fontWeight']): TextStyle {
 
 function Typography(props: TypographyProps) {
   const style: TextStyle = {
-    top: props.top,
+    top: props.top || 1,
     color: props.color,
     fontSize: props.fontSize,
     lineHeight: props.lineHeight,

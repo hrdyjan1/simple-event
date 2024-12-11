@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface Props extends React.PropsWithChildren {}
 
-const styles = StyleSheet.create({ container: { flex: 1, backgroundColor: '#fff' } });
+const styles = StyleSheet.create({ container: { flex: 1, backgroundColor: '#F9F9FB' } });
 
 function Screen({ children }: Props) {
   return (

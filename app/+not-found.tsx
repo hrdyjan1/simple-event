@@ -6,7 +6,7 @@ function NotFoundScreen() {
   return (
     <>
       <Stack.Screen options={{ title: 'Oops!' }} />
-      <Block align='center' hasFlexOne>
+      <Block justifyContent='center' alignItems='center' hasFlexOne>
         <Typography>This screen doesn't exist.</Typography>
 
         <Link href='/'>

@@ -11,7 +11,12 @@ function ModalContent(props: ModalContentProps) {
   const backgroundColor = useThemeColor({}, 'background');
 
   return (
-    <Block hasFlexOne align='center' backgroundColor='rgba(0, 0, 0, 0.5)'>
+    <Block
+      hasFlexOne
+      alignItems='center'
+      justifyContent='center'
+      backgroundColor='rgba(0, 0, 0, 0.5)'
+    >
       <Pressable style={styles.background} onPress={router.back} />
       <View style={[styles.modal, { backgroundColor }]}>{props.children}</View>
     </Block>
