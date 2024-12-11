@@ -6,12 +6,13 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-import { Slot } from 'expo-router';
+import { Slot, Stack } from 'expo-router';
 import { Block } from '@/components/Block/Block';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { persistor, store } from '@/store/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -26,7 +27,11 @@ SplashScreen.preventAutoHideAsync();
 function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    HindBold: require('../assets/fonts/Hind-Bold.ttf'),
+    HindLight: require('../assets/fonts/Hind-Light.ttf'),
+    HindMedium: require('../assets/fonts/Hind-Medium.ttf'),
+    HindRegular: require('../assets/fonts/Hind-Regular.ttf'),
+    HindSemiBold: require('../assets/fonts/Hind-SemiBold.ttf'),
     ...FontAwesome.font,
   });
 
@@ -48,9 +53,11 @@ function RootLayout() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-          <Block hasFlexOne>
-            <Slot />
-          </Block>
+          <SafeAreaProvider>
+            <Block hasFlexOne>
+              <Stack screenOptions={{ headerShown: false }} />
+            </Block>
+          </SafeAreaProvider>
         </ThemeProvider>
       </PersistGate>
     </Provider>

@@ -1,5 +1,4 @@
 import { StyleSheet, View, ViewStyle } from 'react-native';
-import { useThemeColor } from '@/hooks/useThemeColor';
 import { match } from 'ts-pattern';
 import { BlockProps } from './types/BlockProps';
 
@@ -17,12 +16,10 @@ function getSizeStyle(props: Pick<BlockProps, 'hasFlexOne' | 'isAbsoluteFill'>):
 }
 
 function Block({ align, width, height, darkColor, lightColor, ...otherProps }: BlockProps) {
-  const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
-
   const style: ViewStyle = {
     width,
     height,
-    backgroundColor: otherProps.backgroundColor ?? backgroundColor,
+    backgroundColor: otherProps.backgroundColor ?? 'transparent',
     ...getAlignStyle(align),
     ...getSizeStyle(otherProps),
   };

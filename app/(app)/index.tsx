@@ -1,11 +1,11 @@
 import { Block } from '@/components/Block/Block';
-import { Separator } from '@/components/Separator/Separator';
 import { useGetDashboardListQuery } from '@/api/baseApi';
 import { DashboardCard } from '@/components/DashboardCard/DashboardCard';
 import { FlatList, ListRenderItem } from 'react-native';
 import { DashboardDetailResponse } from '@/api/apiTypes';
 import { Link } from 'expo-router';
 import { Typography } from '@/components/Typography/Typography';
+import { Screen } from '@/components/Screen/Screen';
 
 function Dashboard() {
   const { data } = useGetDashboardListQuery();
@@ -17,12 +17,18 @@ function Dashboard() {
   );
 
   return (
-    <Block hasFlexOne align='center'>
-      <Link href='/profile' asChild>
+    <Screen>
+      <Link href='/profile'>
         <Typography>Profile</Typography>
       </Link>
-      <FlatList data={data} renderItem={renderItem} ItemSeparatorComponent={Separator} />
-    </Block>
+      <Block height={16} backgroundColor='transparent' />
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        ItemSeparatorComponent={() => <Block height={16} backgroundColor='transparent' />}
+        contentContainerStyle={{ paddingHorizontal: 10 }}
+      />
+    </Screen>
   );
 }
 
