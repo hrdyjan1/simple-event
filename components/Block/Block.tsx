@@ -12,9 +12,11 @@ function getSizeStyle(props: Pick<BlockProps, 'hasFlexOne' | 'isAbsoluteFill'>):
 function Block(props: BlockProps) {
   const style: ViewStyle = {
     gap: props.gap,
+    top: props.top,
     width: props.width,
     height: props.height,
     borderRadius: props.radius,
+    position: props.position,
     alignItems: props.alignItems,
     borderColor: props.borderColor,
     borderWidth: props.borderWidth,

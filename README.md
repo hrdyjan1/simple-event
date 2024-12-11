@@ -18,3 +18,4 @@ Simple Event is a React Native application for managing and viewing events effor
 - what about no capacity action button
 - data status loading, error, ...
 - empty values
+- handling errors

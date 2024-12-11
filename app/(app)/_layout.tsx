@@ -19,7 +19,7 @@ function AppLayout() {
       <Stack.Screen name='profile' options={{ headerShown: false }} />
       <Stack.Screen name='dashboard' options={{ headerShown: false }} />
       <Stack.Screen
-        name='modal'
+        name='sign-out-modal'
         options={{ presentation: 'transparentModal', animation: 'fade', headerShown: false }}
       />
     </Stack>

@@ -14,7 +14,7 @@ function Button(props: Props) {
       {props.isLoading ? (
         <ActivityIndicator size='small' color='#FFF' />
       ) : (
-        <Typography fontSize={16} lineHeight={32} fontWeight={500} color='#FFF'>
+        <Typography color='#FFF' fontSize={16} lineHeight={32} fontWeight={500}>
           {props.title}
         </Typography>
       )}

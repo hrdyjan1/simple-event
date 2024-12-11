@@ -4,6 +4,7 @@ import { Block } from '../Block/Block';
 import { Typography } from '../Typography/Typography';
 import { Icon } from '../Icon/Icon';
 import { DashboardUserHeader } from '../DashboardUserHeader/DashboardUserHeader';
+import { DashboardCardSwitch } from '../DashboardCardSwitch/DashboardCardSwitch';
 
 interface DashboardHeaderProps {
   firstName: string;
@@ -36,12 +37,9 @@ function DashboardHeader(props: DashboardHeaderProps) {
           <Block width={8} />
           <Icon name='caret-down' color='#323C46' />
         </Block>
-        <Block row alignItems='center' justifyContent='center'>
-          <Ionicons name='grid' size={17} color='#555' />
-          <Block width={15} />
-          <Ionicons name='albums-outline' size={17} color='#555' />
-        </Block>
+        <DashboardCardSwitch />
       </Block>
+
       <Block height={31} />
     </>
   );
