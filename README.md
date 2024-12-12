@@ -19,3 +19,16 @@ Simple Event is a React Native application for managing and viewing events effor
 - data status loading, error, ...
 - empty values
 - handling errors
+- go back from nested screens
+- create event success message?
+
+### Todo
+
+- eslint
+- prettier
+- theme (colors, spaces, shadows, ...)
+- rename event-simple to eventio
+- sync icons
+- remove - createDashboardDetail and stuffs
+- prevent duplicity - f.e. create event (p.s. debounce)
+- keyboard avoid view

@@ -1,16 +1,17 @@
 import { Block } from '@/components/Block/Block';
 import { useGetDashboardListQuery } from '@/api/baseApi';
 import { DashboardCard } from '@/components/DashboardCard/DashboardCard';
-import { Alert, FlatList, ListRenderItem, Pressable } from 'react-native';
+import { FlatList, ListRenderItem, Pressable } from 'react-native';
 import { DashboardDetailResponse } from '@/api/apiTypes';
 import { Link, router } from 'expo-router';
 import { Screen } from '@/components/Screen/Screen';
 import { useAppSelector } from '@/store/store';
 import { DashboardHeader } from '@/components/DashboardHeader/DashboardHeader';
 import { useToggleAttendee } from '@/api/hooks/useToggleAttendee';
+import { FloatingButtonCreate } from '@/components/FloatingButtonCreate/FloatingButtonCreate';
 
 function DashboardScreen() {
-  const { data } = useGetDashboardListQuery();
+  const { data, refetch, isFetching } = useGetDashboardListQuery();
   const { toggleAttendee, checkIsAttendingLoading } = useToggleAttendee();
   const user = useAppSelector((s) => s.auth.user);
 
@@ -30,23 +31,29 @@ function DashboardScreen() {
   );
 
   const goToProfile = () => router.navigate('/profile');
+  const gotToCreate = () => router.navigate('/dashboard/create');
 
   return (
     <Screen>
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        ListFooterComponent={() => <Block height={96} />}
-        ItemSeparatorComponent={() => <Block height={16} />}
-        ListHeaderComponentStyle={{ paddingHorizontal: 24 }}
-        ListHeaderComponent={() => (
-          <DashboardHeader
-            lastName={user?.lastName ?? ''}
-            firstName={user?.firstName ?? ''}
-            onInitialsProfilePress={goToProfile}
-          />
-        )}
-      />
+      <Block hasFlexOne>
+        <FloatingButtonCreate onPress={gotToCreate} />
+        <FlatList
+          data={data}
+          onRefresh={refetch}
+          refreshing={isFetching}
+          renderItem={renderItem}
+          ListFooterComponent={() => <Block height={96} />}
+          ItemSeparatorComponent={() => <Block height={16} />}
+          ListHeaderComponentStyle={{ paddingHorizontal: 24 }}
+          ListHeaderComponent={() => (
+            <DashboardHeader
+              lastName={user?.lastName ?? ''}
+              firstName={user?.firstName ?? ''}
+              onInitialsProfilePress={goToProfile}
+            />
+          )}
+        />
+      </Block>
     </Screen>
   );
 }

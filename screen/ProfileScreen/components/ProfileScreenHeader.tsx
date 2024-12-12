@@ -4,6 +4,7 @@ import { Typography } from '@/components/Typography/Typography';
 import { Card } from '@/components/Card/Card';
 import { DashboardCardSwitch } from '@/components/DashboardCardSwitch/DashboardCardSwitch';
 import { router } from 'expo-router';
+import { UserInitials } from '@/components/UserInitials/UserInitials';
 
 interface Props {
   lastName: string;
@@ -13,16 +14,19 @@ interface Props {
 
 function ProfileScreenHeader(props: Props) {
   const initials = `${props.firstName[0]}${props.lastName[0]}`;
+  const goToSignOutModal = () => router.navigate('/sign-out-modal');
 
   return (
     <>
       <Block height={24} />
       <Block paddingHorizontal={24}>
-        <DashboardUserHeader
-          lastName={props.lastName ?? ''}
-          firstName={props.firstName ?? ''}
-          onInitialsProfilePress={() => router.navigate('/sign-out-modal')}
-        />
+        <DashboardUserHeader>
+          <UserInitials
+            lastName={props.lastName ?? ''}
+            firstName={props.firstName ?? ''}
+            onPress={goToSignOutModal}
+          />
+        </DashboardUserHeader>
       </Block>
 
       <Block height={120} />

@@ -6,10 +6,14 @@ type AdditionalProps = {
   hasFlexOne?: boolean;
   row?: boolean;
   wrap?: boolean;
+  zIndex?: number;
   borderWidth?: number;
   top?: DimensionValue;
+  left?: DimensionValue;
   gap?: string | number;
+  right?: DimensionValue;
   width?: DimensionValue;
+  bottom?: DimensionValue;
   height?: DimensionValue;
   borderColor?: ColorValue;
   isAbsoluteFill?: boolean;

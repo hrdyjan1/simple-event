@@ -13,7 +13,11 @@ function Block(props: BlockProps) {
   const style: ViewStyle = {
     gap: props.gap,
     top: props.top,
+    left: props.left,
     width: props.width,
+    right: props.right,
+    zIndex: props.zIndex,
+    bottom: props.bottom,
     height: props.height,
     borderRadius: props.radius,
     position: props.position,

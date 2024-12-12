@@ -23,7 +23,7 @@ function getFontFamily(variant: TypographyProps['fontWeight']): TextStyle {
 function Typography(props: TypographyProps) {
   const style: TextStyle = {
     top: props.top || 1,
-    color: props.color,
+    color: props.color ?? '#323C46',
     fontSize: props.fontSize,
     lineHeight: props.lineHeight,
     textTransform: props.textTransform,

@@ -1,8 +1,11 @@
 import React from 'react';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { Icon } from '../Icon/Icon';
+import { Typography } from '../Typography/Typography';
+import { Nullish } from '@/types/Nullish';
 
 interface Props extends React.ComponentProps<typeof TextInput> {
+  error?: string | Nullish;
   icon?: {
     name: React.ComponentProps<typeof Icon>['name'];
     onPress: () => void;
@@ -11,14 +14,21 @@ interface Props extends React.ComponentProps<typeof TextInput> {
 
 function Input(props: Props) {
   return (
-    <View style={styles.container}>
-      <TextInput {...props} style={styles.input} placeholderTextColor='#C9CED3' />
-      {props.icon ? (
-        <Pressable onPress={props.icon.onPress} style={styles.icon}>
-          <Icon size={24} name={props.icon.name} color='#E1E4E6' />
-        </Pressable>
-      ) : null}
-    </View>
+    <>
+      <View style={styles.container}>
+        <TextInput {...props} style={styles.input} placeholderTextColor='#C9CED3' />
+        {props.icon ? (
+          <Pressable onPress={props.icon.onPress} style={styles.icon}>
+            <Icon size={24} name={props.icon.name} color='#E1E4E6' />
+          </Pressable>
+        ) : null}
+      </View>
+      {props.error && (
+        <Typography fontSize={12} color='#d91f29'>
+          {props.error}
+        </Typography>
+      )}
+    </>
   );
 }
 

@@ -11,6 +11,7 @@ import { DashboardDetailScreenLowerHeader } from './components/DashboardDetailSc
 import { AttendeesCard } from '@/components/AttendeesCard/AttendeesCard';
 import { getAttendeeDetails } from './utils/getAttendeeDetails';
 import { useToggleAttendee } from '@/api/hooks/useToggleAttendee';
+import { UserInitials } from '@/components/UserInitials/UserInitials';
 
 function DashboardDetailScreen() {
   const params = useLocalSearchParams();
@@ -32,11 +33,13 @@ function DashboardDetailScreen() {
     <Screen>
       <Block height={24} />
       <Block paddingHorizontal={24}>
-        <DashboardUserHeader
-          lastName={user?.lastName ?? ''}
-          firstName={user?.firstName ?? ''}
-          onInitialsProfilePress={goToProfile}
-        />
+        <DashboardUserHeader>
+          <UserInitials
+            lastName={user?.lastName ?? ''}
+            firstName={user?.firstName ?? ''}
+            onPress={goToProfile}
+          />
+        </DashboardUserHeader>
       </Block>
 
       <Block height={49} />

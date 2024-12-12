@@ -5,6 +5,7 @@ import { Typography } from '../Typography/Typography';
 import { Icon } from '../Icon/Icon';
 import { DashboardUserHeader } from '../DashboardUserHeader/DashboardUserHeader';
 import { DashboardCardSwitch } from '../DashboardCardSwitch/DashboardCardSwitch';
+import { UserInitials } from '../UserInitials/UserInitials';
 
 interface DashboardHeaderProps {
   firstName: string;
@@ -17,11 +18,13 @@ function DashboardHeader(props: DashboardHeaderProps) {
     <>
       <Block height={24} />
 
-      <DashboardUserHeader
-        firstName={props.firstName}
-        lastName={props.lastName}
-        onInitialsProfilePress={props.onInitialsProfilePress}
-      />
+      <DashboardUserHeader>
+        <UserInitials
+          lastName={props.lastName}
+          firstName={props.firstName}
+          onPress={props.onInitialsProfilePress}
+        />
+      </DashboardUserHeader>
 
       <Block height={64} />
 
