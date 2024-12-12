@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { Typography } from '../Typography/Typography';
 import { Input } from '../Input/Input';
 import { isDefined } from '@/constants/isDefined';
+import { AuthFormHeader } from '../AuthFormHeader/AuthFormHeader';
 
 function SignUpForm() {
   const [state, reducerDispatch] = React.useReducer(signUpReducer, signUpInitialState);
@@ -43,6 +44,7 @@ function SignUpForm() {
 
   return (
     <Block>
+      <AuthFormHeader title='Get started absolutely free.' subTitle='Enter your details below.' />
       <Typography>Get started absolutely free.</Typography>
       <Typography>Enter your details below.</Typography>
 

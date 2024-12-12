@@ -1,12 +1,3 @@
-import { Block } from '@/components/Block/Block';
-import { SignUpForm } from '@/components/SignUpForm/SignUpForm';
+import { SignUpScreen } from '@/screen/SingUpScreen/SignUpScreen';
 
-function SignUp() {
-  return (
-    <Block hasFlexOne>
-      <SignUpForm />
-    </Block>
-  );
-}
-
-export default SignUp;
+export default SignUpScreen;

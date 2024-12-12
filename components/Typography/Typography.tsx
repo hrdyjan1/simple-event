@@ -1,25 +1,41 @@
-import { useThemeColor } from '@/hooks/useThemeColor';
-import { Text, TextStyle } from 'react-native';
+import { ColorValue, Text, TextStyle } from 'react-native';
 import { match } from 'ts-pattern';
 
-type TextProps = ThemeProps & Omit<Text['props'], 'style' | 'onPress'>;
-type ThemeProps = { lightColor?: string; darkColor?: string };
-type AdditionalProps = { variant?: 'alternative' };
-
-type TypographyProps = ThemeProps & TextProps & AdditionalProps;
-
-function getVariantStyle(variant: AdditionalProps['variant']): TextStyle {
-  return match(variant)
-    .with('alternative', () => ({ color: '#2e78b7' }))
-    .otherwise(() => ({}));
+interface TypographyProps extends React.PropsWithChildren {
+  color?: ColorValue | undefined;
+  top?: number;
+  fontSize?: number;
+  capital?: number;
+  lineHeight?: number;
+  numberOfLines?: number;
+  fontWeight?: 300 | 400 | 500 | 600;
+  textTransform?: TextStyle['textTransform'];
 }
 
-function Typography({ variant, lightColor, darkColor, ...otherProps }: TypographyProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+function getFontFamily(variant: TypographyProps['fontWeight']): TextStyle {
+  return match(variant)
+    .with(300, () => ({ fontFamily: 'HindLight' } as TextStyle))
+    .with(400, () => ({ fontFamily: 'HindRegular' } as TextStyle))
+    .with(500, () => ({ fontFamily: 'HindMedium' } as TextStyle))
+    .with(600, () => ({ fontFamily: 'HindBold' } as TextStyle))
+    .otherwise(() => ({ fontFamily: 'HindRegular' } as TextStyle));
+}
 
-  const style: TextStyle = { color, ...getVariantStyle(variant) };
+function Typography(props: TypographyProps) {
+  const style: TextStyle = {
+    top: props.top || 1,
+    color: props.color ?? '#323C46',
+    fontSize: props.fontSize,
+    lineHeight: props.lineHeight,
+    textTransform: props.textTransform,
+    ...getFontFamily(props.fontWeight),
+  };
 
-  return <Text style={style} {...otherProps} />;
+  return (
+    <Text numberOfLines={props.numberOfLines} style={style}>
+      {props.children}
+    </Text>
+  );
 }
 
 export { TypographyProps, Typography };

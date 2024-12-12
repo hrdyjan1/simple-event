@@ -1,12 +1,3 @@
-import { Block } from '@/components/Block/Block';
-import { CreateDashboardDetailForm } from '@/components/CreateDashboardDetailForm/CreateDashboardDetailForm';
+import { DashboardCreateScreen } from '@/screen/DashboardCreateScreen/DashboardCreateScreen';
 
-function DashboardCreate() {
-  return (
-    <Block hasFlexOne>
-      <CreateDashboardDetailForm />
-    </Block>
-  );
-}
-
-export default DashboardCreate;
+export default DashboardCreateScreen;

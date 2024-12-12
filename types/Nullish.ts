@@ -1,1 +1,3 @@
-export type Nullish = null | undefined;
+type Nullish = null | undefined;
+
+export { Nullish };

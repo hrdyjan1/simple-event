@@ -1,24 +1,15 @@
-import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
-import Colors from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { OpaqueColorValue } from 'react-native';
 
 interface IconProps {
-  isPressed?: boolean;
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  size?: number;
+  color?: string | OpaqueColorValue | undefined;
+  name: React.ComponentProps<typeof Ionicons>['name'];
 }
 
 function Icon(props: IconProps) {
-  const colorScheme = useColorScheme();
-
-  return (
-    <FontAwesome
-      size={25}
-      name={props.name}
-      color={Colors[colorScheme ?? 'light'].text}
-      style={{ marginRight: 15, opacity: props.isPressed ? 0.5 : 1 }}
-    />
-  );
+  return <Ionicons size={props.size} name={props.name} color={props.color} />;
 }
 
 export { Icon };

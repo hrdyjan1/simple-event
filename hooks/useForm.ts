@@ -1,6 +1,6 @@
 import { Nullish } from '@/types/Nullish';
 import React from 'react';
-import { ZodObject, ZodRawShape } from 'zod';
+import { ZodEffects, ZodObject, ZodRawShape } from 'zod';
 
 type FormState<T> = T & { errors: Partial<Record<keyof T, string | Nullish>> };
 
@@ -25,7 +25,7 @@ function reducer<T>(state: FormState<T>, action: FormAction<T>): FormState<T> {
 
 function useForm<T>(
   initialState: T,
-  schema: ZodObject<ZodRawShape>,
+  schema: ZodObject<ZodRawShape> | ZodEffects<ZodObject<ZodRawShape>>,
   setFieldCallback?: () => void
 ) {
   const [state, dispatch] = React.useReducer(reducer<T>, {
