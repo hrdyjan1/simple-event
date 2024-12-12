@@ -1,11 +1,16 @@
 import { StyleSheet, View } from 'react-native';
 
 interface CardProps extends React.PropsWithChildren {
+  height?: number;
   minHeight?: number;
 }
 
 function Card(props: CardProps) {
-  return <View style={{ ...styles.card, minHeight: props.minHeight }}>{props.children}</View>;
+  return (
+    <View style={{ ...styles.card, minHeight: props.minHeight, height: props.height }}>
+      {props.children}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

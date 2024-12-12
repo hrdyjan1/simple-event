@@ -10,7 +10,6 @@ import { DashboardHeader } from '@/components/DashboardHeader/DashboardHeader';
 import { useToggleAttendee } from '@/api/hooks/useToggleAttendee';
 import React from 'react';
 import { toggleTimelineReducer } from './utils/toggleTimelineReducer';
-import { getTime } from 'date-fns';
 import { getTimelineFilter } from './utils/getTimelineFilter';
 
 function DashboardScreen() {
@@ -20,7 +19,7 @@ function DashboardScreen() {
   );
 
   const user = useAppSelector((s) => s.auth.user);
-  const { data, refetch, isFetching } = useGetDashboardListQuery();
+  const { data: dashboardData, refetch, isFetching } = useGetDashboardListQuery();
   const { toggleAttendee, checkIsAttendingLoading } = useToggleAttendee();
   const [eventsTimeline, toggleEventsTimeline] = React.useReducer(toggleTimelineReducer, 'ALL');
 
@@ -40,7 +39,7 @@ function DashboardScreen() {
     </Link>
   );
 
-  const filteredData = data?.filter(getTimelineFilter(eventsTimeline));
+  const data = dashboardData?.filter(getTimelineFilter(eventsTimeline));
 
   const goToProfile = () => router.navigate('/profile');
   const gotToCreate = () => router.navigate('/dashboard/create');
@@ -49,7 +48,7 @@ function DashboardScreen() {
     <Screen onActionButtonPress={gotToCreate}>
       <Block hasFlexOne>
         <FlatList
-          data={filteredData}
+          data={data}
           onRefresh={refetch}
           refreshing={isFetching}
           renderItem={renderItem}

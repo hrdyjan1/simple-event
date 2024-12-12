@@ -4,7 +4,7 @@ import { Button } from '@/components/Button/Button';
 import { InfoLink } from '@/components/InfoLink/InfoLink';
 import { router } from 'expo-router';
 import { Input } from '@/components/Input/Input';
-import { Screen } from '@/components/Screen/Screen';
+import { Screen, Screen2 } from '@/components/Screen/Screen';
 import { signUpInitialState } from '@/components/SignUpForm/utils/signUpInitialState';
 import { signUpStateSchema } from '@/components/SignUpForm/utils/signUpStateSchema';
 import { Typography } from '@/components/Typography/Typography';
@@ -14,6 +14,8 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '@/store/slices/auth';
 import { AuthFormHeader } from '@/components/AuthFormHeader/AuthFormHeader';
 import { Logo } from '@/components/Logo/Logo';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { KeyboardAvoidingView, ScrollView } from 'react-native';
 
 function SignUpScreen() {
   const reduxDispatch = useDispatch();
@@ -102,7 +104,7 @@ function SignUpScreen() {
         <Block width='100%' height={40} />
         <Button title='SIGN UP' onPress={handleSignUp} isLoading={isLoading} />
       </Block>
-      <Block height={39} />
+      <Block height={45} />
     </Screen>
   );
 }

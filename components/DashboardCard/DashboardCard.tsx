@@ -47,16 +47,25 @@ function DashboardCard(props: Props) {
           {props.data.owner.firstName} {props.data.owner.lastName}
         </Typography>
         <Block height={32} />
-        <Text style={styles.description}>{props.data.description}</Text>
+        <Typography fontSize={16} lineHeight={24} color='#949EA8' numberOfLines={3}>
+          {props.data.description} Lorem ipsum dolor sit amet co
+        </Typography>
       </View>
-      <View style={styles.footer}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <Block hasFlexOne />
+      <Block
+        row
+        alignItems='center'
+        paddingVertical={24}
+        paddingHorizontal={24}
+        justifyContent='space-between'
+      >
+        <Block row alignItems='center'>
           <Icon name='person' size={16} color='#949EA8' />
           <Block width={8} />
           <Typography color='#949EA8' fontSize={14} lineHeight={24}>
             {props.data.attendees.length} of {props.data.capacity}
           </Typography>
-        </View>
+        </Block>
         {isDefined(variant) ? (
           <DashboardCardActionButton
             variant={variant}
@@ -64,7 +73,7 @@ function DashboardCard(props: Props) {
             isLoading={props.isToggleAttendLoading}
           />
         ) : null}
-      </View>
+      </Block>
     </Card>
   );
 }

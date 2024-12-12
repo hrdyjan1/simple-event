@@ -14,22 +14,20 @@ function Screen(props: ScreenProps) {
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar animated={true} barStyle='dark-content' showHideTransition='fade' />
-        <Block hasFlexOne>
+        <KeyboardAvoidingView
+          style={styles.flexOn}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        >
           {props.onActionButtonPress ? (
             <FloatingButtonCreate onPress={props.onActionButtonPress} />
           ) : null}
-          <KeyboardAvoidingView
-            style={styles.flexOn}
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          <ScrollView
+            contentContainerStyle={styles.flexGrowOne}
+            keyboardShouldPersistTaps='handled'
           >
-            <ScrollView
-              contentContainerStyle={styles.flexGrowOne}
-              keyboardShouldPersistTaps='handled'
-            >
-              {props.children}
-            </ScrollView>
-          </KeyboardAvoidingView>
-        </Block>
+            {props.children}
+          </ScrollView>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     );
   }

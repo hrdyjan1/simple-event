@@ -1,7 +1,8 @@
 import React from 'react';
 import { Block } from '../Block/Block';
-import { Icon } from '../Icon/Icon';
 import { Pressable } from 'react-native';
+import { GridSvg } from '@/assets/svg/GridSvg';
+import { AlbumSvg } from '@/assets/svg/AlbumSvg';
 
 interface DashboardCardSwitchProps {
   onPress: () => void;
@@ -12,17 +13,9 @@ function DashboardCardSwitch(props: DashboardCardSwitchProps) {
   return (
     <Pressable onPress={props.onPress}>
       <Block row alignItems='center' justifyContent='center'>
-        <Icon
-          name={props.cardVariant === 'small' ? 'grid-outline' : 'grid'}
-          size={17}
-          color='#555'
-        />
-        <Block width={15} />
-        <Icon
-          size={17}
-          color='#555'
-          name={props.cardVariant === 'small' ? 'albums' : 'albums-outline'}
-        />
+        <GridSvg color={props.cardVariant === 'small' ? '#D9DCE1' : '#323C46'} />
+        <Block width={10} />
+        <AlbumSvg color={props.cardVariant === 'small' ? '#323C46' : '#D9DCE1'} />
       </Block>
     </Pressable>
   );
