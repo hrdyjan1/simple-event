@@ -6,6 +6,7 @@ import {
   useUnAttendEventMutation,
 } from '../baseApi';
 import { AttendVariant } from '../types/AttendVariant';
+import { router } from 'expo-router';
 
 function useToggleAttendee() {
   const [loadingIdList, setLoadingIdList] = React.useState<string[]>([]);
@@ -20,13 +21,15 @@ function useToggleAttendee() {
 
   const toggleAttendee = useCallback(
     async (id: string, variant: AttendVariant) => {
-      setLoadingIdList(ids => [...ids, id]);
+      setLoadingIdList((ids) => [...ids, id]);
       if (variant === 'join') {
         await attendEvent({ id }).then(() => updateDashboardData(id));
       } else if (variant === 'leave') {
         await unAttendEvent({ id }).then(() => updateDashboardData(id));
+      } else if (variant === 'edit') {
+        router.navigate(`/dashboard/update/${id}`);
       }
-      setLoadingIdList(ids => ids.filter(i => i !== id));
+      setLoadingIdList((ids) => ids.filter((i) => i !== id));
     },
     [attendEvent]
   );
