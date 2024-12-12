@@ -1,17 +1,30 @@
 import React from 'react';
-import { View } from 'react-native';
 import { Block } from '../Block/Block';
 import { Icon } from '../Icon/Icon';
+import { Pressable } from 'react-native';
 
-interface DashboardCardSwitchProps {}
+interface DashboardCardSwitchProps {
+  onPress: () => void;
+  cardVariant: 'small' | 'big';
+}
 
-function DashboardCardSwitch({}: DashboardCardSwitchProps) {
+function DashboardCardSwitch(props: DashboardCardSwitchProps) {
   return (
-    <Block row alignItems='center' justifyContent='center'>
-      <Icon name='grid' size={17} color='#555' />
-      <Block width={15} />
-      <Icon name='albums-outline' size={17} color='#555' />
-    </Block>
+    <Pressable onPress={props.onPress}>
+      <Block row alignItems='center' justifyContent='center'>
+        <Icon
+          name={props.cardVariant === 'small' ? 'grid-outline' : 'grid'}
+          size={17}
+          color='#555'
+        />
+        <Block width={15} />
+        <Icon
+          size={17}
+          color='#555'
+          name={props.cardVariant === 'small' ? 'albums' : 'albums-outline'}
+        />
+      </Block>
+    </Pressable>
   );
 }
 

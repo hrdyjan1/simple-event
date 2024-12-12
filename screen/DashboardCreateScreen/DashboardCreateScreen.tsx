@@ -54,7 +54,7 @@ function DashboardCreateScreen({}: DashboardCreateScreenProps) {
   };
 
   return (
-    <Screen>
+    <Screen isScrollable>
       <Block height={27} />
 
       <Block paddingHorizontal={24}>

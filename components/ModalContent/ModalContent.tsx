@@ -1,8 +1,6 @@
 import { useRouter } from 'expo-router';
-import { View, Text, Button, StyleSheet, Pressable } from 'react-native';
+import { StyleSheet, Pressable } from 'react-native';
 import { Block } from '../Block/Block';
-import { useThemeColor } from '@/hooks/useThemeColor';
-import { Typography } from '../Typography/Typography';
 
 interface ModalContentProps extends React.PropsWithChildren {}
 
@@ -17,7 +15,6 @@ function ModalContent(props: ModalContentProps) {
       backgroundColor='rgba(0, 0, 0, 0.5)'
     >
       <Pressable style={styles.background} onPress={router.back} />
-      {/* <View style={[styles.modal, { backgroundColor }]}>{props.children}</View> */}
       <Block
         width='80%'
         paddingHorizontal={20}

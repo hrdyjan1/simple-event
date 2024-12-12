@@ -10,41 +10,24 @@ import { formatToFullReadableDate } from '@/utils/date/formatToFullReadableDate'
 import { Icon } from '../Icon/Icon';
 import { Card } from '../Card/Card';
 import { AttendVariant } from '@/api/types/AttendVariant';
+import { getToggleVariant } from './utils/getToggleVariant';
+import { DashboardCardSmall } from './components/DashboardCardSmall';
 
 interface Props {
+  variant: 'small' | 'big';
   userId: string | undefined;
   data: DashboardDetailResponse;
   isToggleAttendLoading?: boolean;
   toggleAttendee?: (id: string, variant: AttendVariant) => void;
 }
 
-function getActionVariant(
-  userId: string | Nullish,
-  data: DashboardDetailResponse
-): AttendVariant | null {
-  console.log('🚀 ~ data.attendees:', data.attendees);
-  console.log('🚀 ~ console:', userId);
-
-  if (userId === data.ownerId) {
-    return 'edit';
-  } else if (data.attendees.find((a) => userId === a.id)) {
-    return 'leave';
-  } else if (data.attendees.length < data.capacity) {
-    return 'join';
-  } else {
-    return null;
-  }
-}
-
 function DashboardCard(props: Props) {
-  const variant = getActionVariant(props.userId, props.data);
-  const dateTime = formatToFullReadableDate(props.data.startsAt);
+  if (props.variant === 'small') {
+    return <DashboardCardSmall {...props} />;
+  }
 
-  const toggleVariant = () => {
-    if (isDefined(props.toggleAttendee) && variant) {
-      props.toggleAttendee(props.data.id, variant);
-    }
-  };
+  const { variant, toggleVariant } = getToggleVariant(props);
+  const dateTime = formatToFullReadableDate(props.data.startsAt);
 
   return (
     <Card minHeight={296}>

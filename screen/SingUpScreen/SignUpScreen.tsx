@@ -44,9 +44,16 @@ function SignUpScreen() {
   };
 
   return (
-    <Screen>
+    <Screen isScrollable>
+      <Block>
+        <Block height={24} />
+        <Block row>
+          <Block width={24} />
+          <Logo />
+        </Block>
+      </Block>
+
       <Block hasFlexOne justifyContent='center' alignItems='center' paddingHorizontal={24}>
-        <Logo position='absolute' />
         <AuthFormHeader title='Get started absolutely free.' subTitle='Enter your details below.' />
 
         <Block width='100%' height={48} backgroundColor='transparent' />
@@ -95,6 +102,7 @@ function SignUpScreen() {
         <Block width='100%' height={40} />
         <Button title='SIGN UP' onPress={handleSignUp} isLoading={isLoading} />
       </Block>
+      <Block height={39} />
     </Screen>
   );
 }

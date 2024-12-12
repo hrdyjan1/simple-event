@@ -8,12 +8,21 @@ import { Screen } from '@/components/Screen/Screen';
 import { useAppSelector } from '@/store/store';
 import { DashboardHeader } from '@/components/DashboardHeader/DashboardHeader';
 import { useToggleAttendee } from '@/api/hooks/useToggleAttendee';
-import { FloatingButtonCreate } from '@/components/FloatingButtonCreate/FloatingButtonCreate';
+import React from 'react';
+import { toggleTimelineReducer } from './utils/toggleTimelineReducer';
+import { getTime } from 'date-fns';
+import { getTimelineFilter } from './utils/getTimelineFilter';
 
 function DashboardScreen() {
+  const [cardVariant, toggleCardVariant] = React.useReducer(
+    (state) => (state === 'small' ? 'big' : 'small'),
+    'big'
+  );
+
+  const user = useAppSelector((s) => s.auth.user);
   const { data, refetch, isFetching } = useGetDashboardListQuery();
   const { toggleAttendee, checkIsAttendingLoading } = useToggleAttendee();
-  const user = useAppSelector((s) => s.auth.user);
+  const [eventsTimeline, toggleEventsTimeline] = React.useReducer(toggleTimelineReducer, 'ALL');
 
   const renderItem: ListRenderItem<DashboardDetailResponse> = ({ item }) => (
     <Link href={{ pathname: '/dashboard/[id]', params: { id: item.id } }} asChild>
@@ -22,6 +31,7 @@ function DashboardScreen() {
           <DashboardCard
             data={item}
             userId={user?.id}
+            variant={cardVariant}
             toggleAttendee={toggleAttendee}
             isToggleAttendLoading={checkIsAttendingLoading(item.id)}
           />
@@ -30,15 +40,16 @@ function DashboardScreen() {
     </Link>
   );
 
+  const filteredData = data?.filter(getTimelineFilter(eventsTimeline));
+
   const goToProfile = () => router.navigate('/profile');
   const gotToCreate = () => router.navigate('/dashboard/create');
 
   return (
-    <Screen>
+    <Screen onActionButtonPress={gotToCreate}>
       <Block hasFlexOne>
-        <FloatingButtonCreate onPress={gotToCreate} />
         <FlatList
-          data={data}
+          data={filteredData}
           onRefresh={refetch}
           refreshing={isFetching}
           renderItem={renderItem}
@@ -47,9 +58,13 @@ function DashboardScreen() {
           ListHeaderComponentStyle={{ paddingHorizontal: 24 }}
           ListHeaderComponent={() => (
             <DashboardHeader
+              cardVariant={cardVariant}
+              eventsTimeline={eventsTimeline}
               lastName={user?.lastName ?? ''}
               firstName={user?.firstName ?? ''}
               onInitialsProfilePress={goToProfile}
+              onCardVariantPress={toggleCardVariant}
+              onEventsTimelinePress={toggleEventsTimeline}
             />
           )}
         />

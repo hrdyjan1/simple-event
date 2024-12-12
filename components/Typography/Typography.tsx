@@ -7,6 +7,7 @@ interface TypographyProps extends React.PropsWithChildren {
   fontSize?: number;
   capital?: number;
   lineHeight?: number;
+  numberOfLines?: number;
   fontWeight?: 300 | 400 | 500 | 600;
   textTransform?: TextStyle['textTransform'];
 }
@@ -30,7 +31,11 @@ function Typography(props: TypographyProps) {
     ...getFontFamily(props.fontWeight),
   };
 
-  return <Text style={style}>{props.children}</Text>;
+  return (
+    <Text numberOfLines={props.numberOfLines} style={style}>
+      {props.children}
+    </Text>
+  );
 }
 
 export { TypographyProps, Typography };

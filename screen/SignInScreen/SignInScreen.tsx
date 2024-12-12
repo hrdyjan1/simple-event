@@ -2,7 +2,7 @@ import { Block } from '@/components/Block/Block';
 import { router } from 'expo-router';
 import { Screen } from '@/components/Screen/Screen';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, KeyboardAvoidingView } from 'react-native';
 import { Input } from '@/components/Input/Input';
 import { Button } from '@/components/Button/Button';
 import { Typography } from '@/components/Typography/Typography';
@@ -12,6 +12,7 @@ import { signInStateSchema } from './utils/signInSchema';
 import { useSignInUserMutation } from '@/api/baseApi';
 import { useDispatch } from 'react-redux';
 import { setUser } from '@/store/slices/auth';
+import { Logo } from '@/components/Logo/Logo';
 
 function SignInScreen() {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -48,9 +49,16 @@ function SignInScreen() {
   };
 
   return (
-    <Screen>
-      <View style={styles.container}>
-        <Text style={styles.logo}>E.</Text>
+    <Screen isScrollable>
+      <Block>
+        <Block height={24} />
+        <Block row>
+          <Block width={24} />
+          <Logo />
+        </Block>
+      </Block>
+
+      <Block hasFlexOne justifyContent='center' alignItems='center' paddingHorizontal={24}>
         <Typography fontSize={22} lineHeight={48} color='#323C46'>
           Sign in to Eventio.
         </Typography>
@@ -97,27 +105,9 @@ function SignInScreen() {
         <Block width='100%' height={40} backgroundColor='transparent' />
 
         <Button title='SIGN IN' onPress={handleSignIn} isLoading={isLoading} />
-      </View>
+      </Block>
     </Screen>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 24,
-  },
-  logo: {
-    position: 'absolute',
-    left: 22,
-    top: 22,
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '# ',
-    marginBottom: 20,
-  },
-});
 
 export { SignInScreen };

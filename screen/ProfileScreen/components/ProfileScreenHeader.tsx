@@ -5,11 +5,14 @@ import { Card } from '@/components/Card/Card';
 import { DashboardCardSwitch } from '@/components/DashboardCardSwitch/DashboardCardSwitch';
 import { router } from 'expo-router';
 import { UserInitials } from '@/components/UserInitials/UserInitials';
+import React from 'react';
 
 interface Props {
+  email: string;
   lastName: string;
   firstName: string;
-  email: string;
+  cardVariant: 'small' | 'big';
+  onCardVariantPress: () => void;
 }
 
 function ProfileScreenHeader(props: Props) {
@@ -75,8 +78,8 @@ function ProfileScreenHeader(props: Props) {
             My events
           </Typography>
         </Block>
-        <Block row>
-          <DashboardCardSwitch />
+        <Block row alignItems='center'>
+          <DashboardCardSwitch cardVariant={props.cardVariant} onPress={props.onCardVariantPress} />
           <Block width={24} />
         </Block>
       </Block>

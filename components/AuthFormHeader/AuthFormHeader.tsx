@@ -1,13 +1,12 @@
 import React from 'react';
-import { View } from 'react-native';
 import { Typography } from '../Typography/Typography';
 
-interface Props {
+interface AuthFormHeaderProps {
   title: string;
   subTitle: string;
 }
 
-function AuthFormHeader(props: Props) {
+function AuthFormHeader(props: AuthFormHeaderProps) {
   return (
     <>
       <Typography fontSize={22} lineHeight={48} color='#323C46'>
